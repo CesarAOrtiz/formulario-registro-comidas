@@ -1,5 +1,6 @@
 import { useReducer, useEffect, createContext, useContext } from "react";
-import { reducer, Dispatcher } from "../reducers/recordsReducer";
+import { reducer } from "../reducers/recordsReducer";
+import RecordDispatcher from "../services/RecordDispatcher";
 import StorageManager from "../services/StorageManager";
 import Record from "../models/Record";
 
@@ -10,21 +11,21 @@ const Records = createContext();
 export const useRecords = () => useContext(Records);
 
 export const RecordsProvider = ({ children }) => {
-  const [records, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     reducer,
     Record.fromJsonArray(StorageManager.load(KEY) || [])
   );
 
-  const dispatcher = new Dispatcher(records, dispatch);
+  const dispatcher = new RecordDispatcher(state, dispatch);
 
   useEffect(() => {
-    if (JSON.stringify(records) !== JSON.stringify(StorageManager.load(KEY))) {
-      StorageManager.save(KEY, records);
+    if (JSON.stringify(state) !== JSON.stringify(StorageManager.load(KEY))) {
+      StorageManager.save(KEY, state);
     }
-  }, [records]);
+  }, [state]);
 
   return (
-    <Records.Provider value={{ records, dispatcher }}>
+    <Records.Provider value={{ state, dispatcher }}>
       {children}
     </Records.Provider>
   );
