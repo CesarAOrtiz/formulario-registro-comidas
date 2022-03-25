@@ -29,8 +29,6 @@ export const RecordsProvider = ({ children }) => {
     dispatch({ type: actions.DELETE_RECORD, payload: id });
   };
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     if (JSON.stringify(records) !== JSON.stringify(StorageManager.load(KEY))) {
       StorageManager.save(KEY, records);
