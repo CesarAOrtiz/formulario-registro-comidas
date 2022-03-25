@@ -1,30 +1,30 @@
 import React from "react";
 
-export default function Input({
-  error,
-  helperText,
+export default function Textarea({
   label,
   className,
   name,
   id,
+  error,
+  helperText,
   ...props
 }) {
   return (
     <>
-      <input
-        type="text"
+      <textarea
         name={name}
         id={id}
-        className={`block py-2 px-2 w-full text-sm text-gray-900 bg-gray-400 bg-opacity-20 rounded shadow-md border-0 border-b-2 border-gray-300 appearance-none outline-none focus:ring-0 focus:border-blue-600 peer 
-                    ${
-                      error
-                        ? "text-red-500 border-red-500 bg-red-500 bg-opacity-20 focus:border-red-500"
-                        : ""
-                    } 
-                    ${className || ""}`}
+        rows="4"
         placeholder=" "
+        className={`block py-2 px-2 w-full text-sm text-gray-900 bg-gray-400 bg-opacity-20 rounded shadow-md border-0 border-b-2 border-gray-300 appearance-none outline-none focus:ring-0 focus:border-blue-600 peer 
+        ${
+          error
+            ? "text-red-500 border-red-500 bg-red-500 bg-opacity-20 focus:border-red-500"
+            : ""
+        } 
+        ${className || ""}`}
         {...props}
-      />
+      ></textarea>
       {error && <p className="text-xs text-red-500 px-2">{helperText}</p>}
       <label
         htmlFor={name || id}
