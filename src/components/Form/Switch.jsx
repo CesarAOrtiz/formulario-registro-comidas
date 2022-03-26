@@ -7,6 +7,8 @@ export default function Switch({
   className,
   onChange,
   checked = false,
+  field,
+  form,
   ...props
 }) {
   const [state, setState] = useState(checked);
@@ -23,6 +25,7 @@ export default function Switch({
             typeof onChange === "function" && onChange(e);
           }}
           checked={state}
+          {...field}
           {...props}
         />
         <label

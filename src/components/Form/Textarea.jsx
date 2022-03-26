@@ -7,6 +7,8 @@ export default function Textarea({
   id,
   error,
   helperText,
+  field,
+  form,
   ...props
 }) {
   return (
@@ -23,6 +25,7 @@ export default function Textarea({
             : ""
         } 
         ${className || ""}`}
+        {...field}
         {...props}
       ></textarea>
       {error && <p className="text-xs text-red-500 px-2">{helperText}</p>}
