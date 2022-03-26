@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Input from "./Input";
 import Switch from "./Switch";
 import Textarea from "./Textarea";
@@ -20,24 +20,37 @@ export default function RecordForm(props) {
 
   const { dispatcher } = useRecords();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const simulateAwaitResponse = (data) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      dispatcher.addRecord(Record.fromJson({ ...data, id: Date.now() }));
+      reset();
+      setIsLoading(false);
+    }, 1000);
+  };
+
   return (
-    <form
-      {...props}
-      onSubmit={handleSubmit((data) => {
-        dispatcher.addRecord(Record.fromJson(data));
-        reset();
-      })}
-    >
+    <form {...props} onSubmit={handleSubmit(simulateAwaitResponse)}>
       {inputs.map((input) => {
-        const { type, id, name, required, pattern, helperText, ...rest } =
-          input;
+        const {
+          type,
+          id,
+          name,
+          required,
+          pattern,
+          validate,
+          helperText,
+          ...rest
+        } = input;
 
         const { ref: innerRef, ...field } = register(name || id, {
-          required: helperText,
+          required: required && helperText,
           pattern: {
             value: pattern,
             message: helperText,
           },
+          validate: validate,
         });
 
         const props = {
@@ -64,8 +77,9 @@ export default function RecordForm(props) {
       })}
 
       <button
+        disabled={isLoading}
         type="submit"
-        className="text-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full px-5 py-2.5 text-sm text-center font-medium"
+        className="text-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full px-5 py-2.5 text-sm text-center font-medium disabled:opacity-50 disabled:pointer-events-none"
       >
         Submit
       </button>

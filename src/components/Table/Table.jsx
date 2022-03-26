@@ -17,7 +17,7 @@ const headers = [
 ];
 
 export default function Table() {
-  const { state: records, dispatcher } = useRecords();
+  const { filteredRecords: records, dispatcher } = useRecords();
   return (
     <table className="table-auto">
       <thead>

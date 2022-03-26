@@ -1,4 +1,10 @@
-import { useReducer, useEffect, createContext, useContext } from "react";
+import {
+  useState,
+  useReducer,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
 import { reducer } from "../reducers/recordsReducer";
 import RecordDispatcher from "../services/RecordDispatcher";
 import StorageManager from "../services/StorageManager";
@@ -15,6 +21,8 @@ export const RecordsProvider = ({ children }) => {
     reducer,
     Record.fromJsonArray(StorageManager.load(KEY) || [])
   );
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredRecords, setFilteredRecords] = useState(state);
 
   const dispatcher = new RecordDispatcher(state, dispatch);
 
@@ -24,8 +32,20 @@ export const RecordsProvider = ({ children }) => {
     }
   }, [state]);
 
+  useEffect(() => {
+    const filtered = state.filter(({ name, lastName }) => {
+      return `${name} ${lastName}`
+        .toLowerCase()
+        .trim()
+        .includes(filterValue.toLowerCase().trim());
+    });
+    setFilteredRecords(filtered);
+  }, [state, filterValue]);
+
   return (
-    <Records.Provider value={{ state, dispatcher }}>
+    <Records.Provider
+      value={{ state, dispatcher, filteredRecords, setFilterValue }}
+    >
       {children}
     </Records.Provider>
   );

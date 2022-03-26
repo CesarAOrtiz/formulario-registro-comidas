@@ -53,8 +53,10 @@ const inputs = [
     label: "Phone",
     required: false,
 
-    helperText: "Must be a valid phone number",
-    pattern: /^[0-9]{10}$/,
+    validate: {
+      pattern: (v) =>
+        !v || /^[0-9]{10}$/.test(v) || "Must be a valid phone number",
+    },
   },
   {
     type: "switch",
