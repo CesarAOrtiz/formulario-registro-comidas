@@ -21,6 +21,7 @@ export const RecordsProvider = ({ children }) => {
   useEffect(() => {
     if (JSON.stringify(state) !== JSON.stringify(StorageManager.load(KEY))) {
       StorageManager.save(KEY, state);
+      console.log(state);
     }
   }, [state]);
 

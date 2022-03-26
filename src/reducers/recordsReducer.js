@@ -1,3 +1,5 @@
+import Record from "../models/Record";
+
 export const actions = {
   ADD_RECORD: "ADD_RECORD",
   DELETE_RECORD: "DELETE_RECORD",
@@ -14,7 +16,7 @@ export const reducer = (state = [], action) => {
         (record) => record.id === action.payload
       );
       delete_idx !== -1 && state.splice(delete_idx, 1);
-      return state;
+      return [...state];
     case actions.EDIT_RECORD:
       // return state.map((record) =>
       //   record.id === action.payload.id
@@ -25,8 +27,11 @@ export const reducer = (state = [], action) => {
         (record) => record.id === action.payload.id
       );
       edit_idx !== -1 &&
-        (state[edit_idx] = { ...state[edit_idx], ...action.payload });
-      return state;
+        (state[edit_idx] = Record.fromJson({
+          ...state[edit_idx],
+          ...action.payload,
+        }));
+      return [...state];
     default:
       return state;
   }

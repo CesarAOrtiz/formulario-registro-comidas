@@ -3,9 +3,9 @@ import Input from "./Input";
 import Switch from "./Switch";
 import Textarea from "./Textarea";
 
-export default function Form() {
+export default function Form(props) {
   return (
-    <form className="w-[380px] p-2">
+    <form {...props}>
       <div className="grid">
         <div className="relative z-0 mb-6 w-full group">
           <Input
