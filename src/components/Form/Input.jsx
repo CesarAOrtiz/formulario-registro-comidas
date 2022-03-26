@@ -7,8 +7,7 @@ export default function Input({
   className,
   name,
   id,
-  field,
-  form,
+  innerRef,
   ...props
 }) {
   return (
@@ -25,7 +24,7 @@ export default function Input({
                     } 
                     ${className || ""}`}
         placeholder=" "
-        {...field}
+        ref={innerRef}
         {...props}
       />
       {error && <p className="text-xs text-red-500 px-2">{helperText}</p>}

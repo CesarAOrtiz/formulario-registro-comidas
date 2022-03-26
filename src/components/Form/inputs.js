@@ -5,8 +5,9 @@ const inputs = [
     id: "name",
     label: "Name",
     required: true,
-    error: false,
+
     helperText: "Is required",
+    autoFocus: true,
   },
   {
     type: "text",
@@ -14,7 +15,7 @@ const inputs = [
     id: "lastName",
     label: "Last Name",
     required: true,
-    error: false,
+
     helperText: "Is required",
   },
   {
@@ -23,17 +24,18 @@ const inputs = [
     id: "age",
     label: "Age",
     required: true,
-    error: false,
+
     helperText: "Is required",
   },
   {
-    type: "email",
+    type: "text",
     name: "email",
     id: "email",
     label: "Email",
     required: true,
-    error: false,
+
     helperText: "Must be a valid email",
+    pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
   },
   {
     type: "text",
@@ -41,7 +43,7 @@ const inputs = [
     id: "address",
     label: "Address",
     required: true,
-    error: false,
+
     helperText: "Is required",
   },
   {
@@ -50,9 +52,9 @@ const inputs = [
     id: "phone",
     label: "Phone",
     required: false,
-    error: false,
+
     helperText: "Must be a valid phone number",
-    pattern: "^[0-9]{10}$",
+    pattern: /^[0-9]{10}$/,
   },
   {
     type: "switch",

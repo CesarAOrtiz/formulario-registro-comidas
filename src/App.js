@@ -12,7 +12,7 @@ function App() {
             Brand
           </Card>
           <div className="flex justify-evenly w-full">
-            <Card className="bg-white !shadow-xl rounded-xl min-w-[250px] w-[90%] max-w-[380px] max-h-[660px] mr-4">
+            <Card className="bg-white !shadow-xl rounded-xl min-w-[250px] w-[90%] max-w-[380px] max-h-[770px] mr-4">
               <Form />
             </Card>
 

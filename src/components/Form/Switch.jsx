@@ -6,9 +6,9 @@ export default function Switch({
   id,
   className,
   onChange,
+  helperText,
   checked = false,
-  field,
-  form,
+  innerRef,
   ...props
 }) {
   const [state, setState] = useState(checked);
@@ -25,7 +25,7 @@ export default function Switch({
             typeof onChange === "function" && onChange(e);
           }}
           checked={state}
-          {...field}
+          ref={innerRef}
           {...props}
         />
         <label
