@@ -27,7 +27,7 @@ export default function Switch({
         />
         <label
           htmlFor={name || id}
-          className="block shadow-md overflow-hidden h-6 rounded-full bg-gray-200 cursor-pointer peer-checked:bg-blue-600"
+          className="block shadow-md overflow-hidden h-6 rounded-full bg-gray-200 cursor-pointer peer-checked:bg-blue-700"
         ></label>
       </div>
       <label htmlFor={name || id} className="text-sm text-gray-500 mt-1">

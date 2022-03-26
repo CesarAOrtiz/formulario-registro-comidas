@@ -4,6 +4,6 @@ export default class StorageManager {
   }
 
   static load(key) {
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key) || JSON.stringify(null));
   }
 }

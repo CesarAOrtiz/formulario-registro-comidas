@@ -16,7 +16,7 @@ export default function Textarea({
         id={id}
         rows="4"
         placeholder=" "
-        className={`block py-2 px-2 w-full text-sm text-gray-900 bg-gray-400 bg-opacity-20 rounded shadow-md border-0 border-b-2 border-gray-300 appearance-none outline-none focus:ring-0 focus:border-blue-600 peer 
+        className={`block py-2 px-2 w-full text-md text-gray-900 bg-gray-400 bg-opacity-20 rounded shadow-md border-0 border-b-2 border-gray-300 appearance-none outline-none focus:ring-0 focus:border-blue-600 peer 
         ${
           error
             ? "text-red-500 border-red-500 bg-red-500 bg-opacity-20 focus:border-red-500"

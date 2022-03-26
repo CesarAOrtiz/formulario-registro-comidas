@@ -21,7 +21,7 @@ export default function Table() {
   return (
     <table className="table-auto">
       <thead>
-        <tr className="bg-gray-300 text-gray-600 uppercase text-sm">
+        <tr className="bg-blue-700 text-white uppercase text-sm">
           {headers.map((header) => (
             <th
               key={header}
