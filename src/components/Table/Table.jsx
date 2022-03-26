@@ -4,7 +4,17 @@ import Edit from "../../icons/Edit";
 import See from "../../icons/See";
 
 import { useRecords } from "../../contexts/RecordsContext";
-import Record from "../../models/Record";
+
+const headers = [
+  "Name",
+  "Last Name",
+  "Phone",
+  "Email",
+  "Age",
+  "Address",
+  "Obsevations",
+  "Delivered",
+];
 
 export default function Table() {
   const { state: records, dispatcher } = useRecords();
@@ -12,15 +22,16 @@ export default function Table() {
     <table className="table-auto">
       <thead>
         <tr className="bg-gray-300 text-gray-600 uppercase text-sm">
-          <th className="py-3 px-6 text-left">Name</th>
-          <th className="py-3 px-6 text-left">Last Name</th>
-          <th className="py-3 px-6 text-left">Phone</th>
-          <th className="py-3 px-6 text-left">Email</th>
-          <th className="py-3 px-6 text-left">Age</th>
-          <th className="py-3 px-6 text-left">Address</th>
-          <th className="py-3 px-6 text-left">Delivered</th>
-          <th className="py-3 px-6 text-left">Observation</th>
-          <th className="py-3 px-6 text-center sticky right-[-1px] bg-inherit">
+          {headers.map((header) => (
+            <th
+              key={header}
+              className="py-3 px-6 text-left sticky top-0 bg-inherit z-10"
+            >
+              {header}
+            </th>
+          ))}
+
+          <th className="py-3 px-6 text-center sticky top-0 bg-inherit right-[-1px] z-10">
             Actions
           </th>
         </tr>
@@ -54,16 +65,24 @@ export default function Table() {
                   />
                 </div>
               </td>
-              <td className="py-3 px-6 text-center sticky right-[-1px] bg-inherit">
+              <td className="py-3 px-6 text-center sticky right-0 bg-inherit">
                 <div className="flex item-center justify-center cursor-pointer">
-                  <div className="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
-                    <See onClick={() => console.log(td)} />
+                  <div className="w-4 mr-3 transform hover:text-blue-500 hover:scale-110">
+                    <See
+                      onClick={() =>
+                        dispatcher.addRecord({ ...td, id: Date.now() })
+                      }
+                    />
                   </div>
-                  <div className="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
-                    <Edit onClick={() => console.log(td)} />
+                  <div className="w-4 mr-3 transform hover:text-blue-500 hover:scale-110">
+                    <Edit
+                      onClick={() =>
+                        dispatcher.editRecord({ ...td, phone: Date.now() })
+                      }
+                    />
                   </div>
-                  <div className="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
-                    <Delete onClick={() => console.log(td)} />
+                  <div className="w-4 mr-3 transform hover:text-blue-500 hover:scale-110">
+                    <Delete onClick={() => dispatcher.deleteRecord(id)} />
                   </div>
                 </div>
               </td>

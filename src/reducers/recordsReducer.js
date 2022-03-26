@@ -9,7 +9,7 @@ export const actions = {
 export const reducer = (state = [], action) => {
   switch (action.type) {
     case actions.ADD_RECORD:
-      return [...state, action.payload];
+      return [Record.fromJson(action.payload), ...state];
     case actions.DELETE_RECORD:
       // return state.filter((record) => record.id !== action.payload);
       const delete_idx = state.findIndex(
