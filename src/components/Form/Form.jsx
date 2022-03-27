@@ -5,7 +5,7 @@ import Textarea from "./Textarea";
 import { useRecords } from "../../contexts/RecordsContext";
 import Record from "../../models/Record";
 
-import inputs from "./inputs";
+import inputs from "../../utils/inputs";
 
 import swal from "sweetalert2";
 import { useForm } from "react-hook-form";
@@ -62,6 +62,7 @@ export default function RecordForm(props) {
               message: helperText,
             },
             validate: validate,
+            shouldUnregister: true,
           });
 
           const props = {
@@ -76,8 +77,8 @@ export default function RecordForm(props) {
 
           return (
             <div className="relative z-0 mb-6 w-full" key={id}>
-              {type === "switch" ? (
-                <Switch {...props} {...{ type: "checkbox" }} />
+              {type === "checkbox" ? (
+                <Switch {...props} />
               ) : type === "textarea" ? (
                 <Textarea {...props} />
               ) : (

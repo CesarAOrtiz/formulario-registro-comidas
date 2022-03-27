@@ -59,15 +59,15 @@ const inputs = [
     },
   },
   {
-    type: "switch",
+    type: "checkbox",
     name: "delivered",
     id: "delivered",
     label: "Delivered",
   },
   {
     type: "textarea",
-    name: "observations",
-    id: "observations",
+    name: "observation",
+    id: "observation",
     label: "Observations",
     required: false,
   },

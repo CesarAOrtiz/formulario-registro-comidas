@@ -3,16 +3,55 @@ import Card from "./Card";
 import Table from "./Table";
 import EditForm from "./Form/EditForm";
 
+import { useRecords } from "../contexts/RecordsContext";
+import swal from "sweetalert2";
+
 export default function EditPage() {
-  const [selected, setSelected] = useState(null);
+  const { dispatcher } = useRecords();
+  const [selected, setSelected] = useState({});
+
+  const handleEdit = (td) => {
+    setSelected({ ...td });
+  };
+
+  const handleDelivered = (td) => {
+    td.toggleDelivered();
+    dispatcher.editRecord(td);
+    swal.fire("¡Registro actualizado!", "", "success");
+  };
+
+  const handleDelete = async ({ id }) => {
+    const { isConfirmed } = await swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#1d4ed8",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (isConfirmed) {
+      dispatcher.deleteRecord(id);
+      swal.fire("Deleted!", "Your file has been deleted.", "success");
+    }
+  };
+
+  const handleSubmit = (data) => {
+    setSelected({});
+    dispatcher.editRecord(data);
+  };
+
   return (
     <>
-      <Card className="bg-white min-w-[250px] w-[90%] max-w-[380px] h-full max-h-[770px] mr-4">
-        <EditForm />
+      <Card className="bg-white w-full h-full max-h-[770px] mx-auto lg:mr-4 lg:min-w-[250px] lg:w-[90%] lg:max-w-[380px] mb-5 lg:mb-0">
+        <EditForm selected={selected} onSubmit={handleSubmit} />
       </Card>
 
-      <Card className="bg-white overflow-auto max-w-[90%] h-full max-h-[700px] p-0">
-        <Table />
+      <Card className="bg-white overflow-auto max-w-full h-full max-h-[700px] p-0 mx-auto">
+        <Table
+          onRowEdit={handleEdit}
+          onDelivered={handleDelivered}
+          onRowDelete={handleDelete}
+        />
       </Card>
     </>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Switch({
   label,
@@ -12,6 +12,9 @@ export default function Switch({
   ...props
 }) {
   const [state, setState] = useState(checked);
+
+  useEffect(() => setState(checked), [checked]);
+
   return (
     <>
       <div className="relative inline-block w-12 mr-2 align-middle select-none">

@@ -3,12 +3,10 @@ import Search from "./Search";
 import Switch from "../Form/Switch";
 import Delete from "../../icons/Delete";
 import Edit from "../../icons/Edit";
-import See from "../../icons/See";
 
 import { useRecords } from "../../contexts/RecordsContext";
 import usePagination from "../../hooks/usePagination";
 
-import swal from "sweetalert2";
 import { useState } from "react";
 
 const headers = [
@@ -22,31 +20,16 @@ const headers = [
   "Delivered",
 ];
 
-export default function Table({ className, ...props }) {
+export default function Table({
+  className,
+  onRowEdit,
+  onRowDelete,
+  onDelivered,
+  ...props
+}) {
   const [pageSize, setPageSize] = useState(5);
-  const { filteredRecords: records, dispatcher, setFilterValue } = useRecords();
+  const { filteredRecords: records, setFilterValue } = useRecords();
   const { page, ...pagination } = usePagination(records, pageSize);
-
-  const handleDelete = async (id) => {
-    const { isConfirmed } = await swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      showCancelButton: true,
-      confirmButtonColor: "#dc2626",
-      cancelButtonColor: "#1d4ed8",
-      confirmButtonText: "Yes, delete it!",
-    });
-    if (isConfirmed) {
-      dispatcher.deleteRecord(id);
-      swal.fire("Deleted!", "Your file has been deleted.", "success");
-    }
-  };
-
-  const handleDelivered = (td) => {
-    td.toggleDelivered();
-    dispatcher.editRecord(td);
-    swal.fire("¡Registro actualizado!", "", "success");
-  };
 
   return (
     <>
@@ -89,7 +72,8 @@ export default function Table({ className, ...props }) {
             </th>
           </tr>
         </thead>
-        <tbody className="text-gray-600 text-sm font-light overflow-y-scroll h-[100px]">
+        <tbody className="text-gray-600 text-sm font-light">
+          {/* {console.log(page[0].delivered)} */}
           {page.map((td, i) => {
             const { id, delivered, ...record } = td;
             return (
@@ -110,29 +94,18 @@ export default function Table({ className, ...props }) {
                   <div className="flex items-center">
                     <Switch
                       id={id}
-                      checked={delivered}
-                      onClick={() => handleDelivered(td)}
+                      checked={td.delivered}
+                      onChange={() => onDelivered(td)}
                     />
                   </div>
                 </td>
                 <td className="py-3 px-6 text-center sticky right-0 bg-inherit">
                   <div className="flex item-center justify-center cursor-pointer">
-                    {/* <div className="w-4 mr-3 text-green-600 transform hover:text-blue-500 hover:scale-110">
-                      <See
-                        onClick={() =>
-                          dispatcher.addRecord({ ...td, id: Date.now() })
-                        }
-                      />
-                    </div> */}
                     <div className="w-4 mr-3 text-yellow-600 transform hover:text-blue-500 hover:scale-110">
-                      <Edit
-                        onClick={() =>
-                          dispatcher.editRecord({ ...td, phone: Date.now() })
-                        }
-                      />
+                      <Edit onClick={() => onRowEdit && onRowEdit(td)} />
                     </div>
                     <div className="w-4 mr-3 text-red-600 transform hover:text-blue-500 hover:scale-110">
-                      <Delete onClick={() => handleDelete(id)} />
+                      <Delete onClick={() => onRowDelete && onRowDelete(td)} />
                     </div>
                   </div>
                 </td>
