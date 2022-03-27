@@ -1,6 +1,13 @@
-import React, { useReducer, useEffect, createContext, useContext } from "react";
-import { actions, reducer } from "../reducers/recordsReducer";
-import StorageManager from "../utils/StorageManager";
+import {
+  useState,
+  useReducer,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
+import { reducer } from "../reducers/recordsReducer";
+import RecordDispatcher from "../services/RecordDispatcher";
+import StorageManager from "../services/StorageManager";
 import Record from "../models/Record";
 
 const KEY = "records";
@@ -10,34 +17,34 @@ const Records = createContext();
 export const useRecords = () => useContext(Records);
 
 export const RecordsProvider = ({ children }) => {
-  const [records, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     reducer,
     Record.fromJsonArray(StorageManager.load(KEY) || [])
   );
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredRecords, setFilteredRecords] = useState(state);
 
-  const getRecord = (id) => records.find((record) => record.id === id);
-
-  const addRecord = (record) => {
-    dispatch({ type: actions.ADD_RECORD, payload: record });
-  };
-
-  const editRecord = (record) => {
-    dispatch({ type: actions.EDIT_RECORD, payload: record });
-  };
-
-  const deleteRecord = (id) => {
-    dispatch({ type: actions.DELETE_RECORD, payload: id });
-  };
+  const dispatcher = new RecordDispatcher(state, dispatch);
 
   useEffect(() => {
-    if (JSON.stringify(records) !== JSON.stringify(StorageManager.load(KEY))) {
-      StorageManager.save(KEY, records);
+    if (JSON.stringify(state) !== JSON.stringify(StorageManager.load(KEY))) {
+      StorageManager.save(KEY, state);
     }
-  }, [records]);
+  }, [state]);
+
+  useEffect(() => {
+    const filtered = state.filter(({ name, lastName, email }) => {
+      return `${name} ${lastName} ${email}`
+        .toLowerCase()
+        .trim()
+        .includes(filterValue.toLowerCase().trim());
+    });
+    setFilteredRecords(filtered);
+  }, [state, filterValue]);
 
   return (
     <Records.Provider
-      value={{ records, getRecord, addRecord, deleteRecord, editRecord }}
+      value={{ state, dispatcher, filteredRecords, setFilterValue }}
     >
       {children}
     </Records.Provider>
