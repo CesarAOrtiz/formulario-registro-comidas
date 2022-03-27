@@ -1,6 +1,6 @@
-import Footer from "./Footer";
+import TablePagination from "./TablePagination";
+import Search from "./Search";
 import Switch from "../Form/Switch";
-import Search from "../Header/Search";
 import Delete from "../../icons/Delete";
 import Edit from "../../icons/Edit";
 import See from "../../icons/See";
@@ -9,6 +9,7 @@ import { useRecords } from "../../contexts/RecordsContext";
 import usePagination from "../../hooks/usePagination";
 
 import swal from "sweetalert2";
+import { useState } from "react";
 
 const headers = [
   "Name",
@@ -22,8 +23,9 @@ const headers = [
 ];
 
 export default function Table({ className, ...props }) {
+  const [pageSize, setPageSize] = useState(5);
   const { filteredRecords: records, dispatcher, setFilterValue } = useRecords();
-  const { page, ...pagination } = usePagination(records, 5);
+  const { page, ...pagination } = usePagination(records, pageSize);
 
   const handleDelete = async (id) => {
     const { isConfirmed } = await swal.fire({
@@ -48,8 +50,27 @@ export default function Table({ className, ...props }) {
 
   return (
     <>
-      <div className="bg-blue-700 shadow-xl p-5 sticky top-0 left-0 z-10">
-        <Search onChange={(e) => setFilterValue(e.target.value)} />
+      <div className="bg-blue-700 w-full shadow-lg p-5 sticky top-0 left-0 z-10 flex justify-between">
+        <div className="w-full mr-5">
+          <Search
+            className="flex flex-grow shadow-lg"
+            onChange={(e) => setFilterValue(e.target.value)}
+          />
+        </div>
+        {/* <select >
+          <option value="">All</option>
+          <option value="true">Delivered</option>
+          <option value="false">Not Delivered</option>
+        </select> */}
+        <select
+          title="pageSize"
+          className="py-2 px-4 bg-white shadow-lg rounded-lg cursor-pointer focus:outline-none"
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
       </div>
       <table className={`table-fixed ${className}`} {...props}>
         <thead>
@@ -121,7 +142,10 @@ export default function Table({ className, ...props }) {
         </tbody>
       </table>
 
-      <Footer className="sticky bottom-0 left-0" pagination={pagination} />
+      <TablePagination
+        className="sticky bottom-0 left-0"
+        pagination={pagination}
+      />
     </>
   );
 }

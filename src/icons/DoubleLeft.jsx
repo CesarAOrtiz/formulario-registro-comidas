@@ -1,7 +1,7 @@
-export default function DoubleLeft(props) {
+export default function DoubleLeft({ className, ...props }) {
   return (
     <svg
-      className="w-5 h-5"
+      className={`w-6 h-5 ${className}`}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

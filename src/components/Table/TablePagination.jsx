@@ -1,4 +1,3 @@
-import React from "react";
 import LeftRow from "../../icons/LeftRow";
 import RightRow from "../../icons/RightRow";
 import DoubleLeft from "../../icons/DoubleLeft";
@@ -15,13 +14,13 @@ const Button = ({ className, children, ...props }) => {
   );
 };
 
-export default function Footer({ className, pagination, ...props }) {
+export default function TablePagination({ className, pagination, ...props }) {
   return (
     <div
       className={`bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 ${className}`}
       {...props}
     >
-      <div className="flex flex-1 items-center justify-between flex-col lg:flex-row">
+      <nav className="flex flex-1 items-center justify-between flex-col lg:flex-row">
         <p className="text-md text-gray-600 md:pb-2">
           Showing
           <span className="font-medium">{` ${pagination.start} `}</span>
@@ -31,7 +30,7 @@ export default function Footer({ className, pagination, ...props }) {
           <span className="font-medium">{` ${pagination.length} `}</span>
           results
         </p>
-        <nav
+        <div
           className="relative z-0 inline-flex rounded-md"
           aria-label="Pagination"
         >
@@ -39,7 +38,7 @@ export default function Footer({ className, pagination, ...props }) {
             <DoubleLeft />
           </Button>
           <Button onClick={pagination.prev}>
-            <LeftRow className="w-6" />
+            <LeftRow />
           </Button>
           <button
             aria-current="page"
@@ -48,13 +47,13 @@ export default function Footer({ className, pagination, ...props }) {
             {pagination.current}
           </button>
           <Button onClick={pagination.next}>
-            <RightRow className="w-6" />
+            <RightRow />
           </Button>
           <Button onClick={pagination.last}>
             <DoubleRight />
           </Button>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </div>
   );
 }
