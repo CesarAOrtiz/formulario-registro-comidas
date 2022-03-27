@@ -20,6 +20,7 @@ export default function RecordForm(props) {
 
   const { dispatcher } = useRecords();
 
+  // función para simular el tiempo de carga de una petición
   const [isLoading, setIsLoading] = useState(false);
   const simulateAwaitResponse = (data) => {
     setIsLoading(true);
