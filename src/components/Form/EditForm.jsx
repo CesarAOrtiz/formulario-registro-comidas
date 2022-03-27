@@ -32,67 +32,66 @@ export default function RecordForm(props) {
       reset();
       setIsLoading(false);
       if (clicks % 3 === 0) {
-        swal.fire("¡Error!", "No se pudo guardar el registro", "error");
+        swal.fire("¡Error!", "No se pudo editar el registro", "error");
       } else {
         dispatcher.addRecord(Record.fromJson({ ...data, id: Date.now() }));
-        swal.fire("¡Registro creado!", "", "success");
+        swal.fire("¡Registro editado!", "", "success");
       }
     }, 500);
   };
 
   return (
     <form {...props} onSubmit={handleSubmit(simulateAwaitResponse)}>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-        {inputs.map((input) => {
-          const {
-            type,
-            id,
-            name,
-            required,
-            pattern,
-            validate,
-            helperText,
-            ...rest
-          } = input;
+      {inputs.map((input) => {
+        const {
+          type,
+          id,
+          name,
+          required,
+          pattern,
+          validate,
+          helperText,
+          ...rest
+        } = input;
 
-          const { ref: innerRef, ...field } = register(name || id, {
-            required: required && helperText,
-            pattern: {
-              value: pattern,
-              message: helperText,
-            },
-            validate: validate,
-          });
+        const { ref: innerRef, ...field } = register(name || id, {
+          required: required && helperText,
+          pattern: {
+            value: pattern,
+            message: helperText,
+          },
+          validate: validate,
+        });
 
-          const props = {
-            type,
-            id,
-            innerRef,
-            ...field,
-            ...rest,
-            error: errors[id] && true,
-            helperText: errors[id] && errors[id].message,
-          };
+        const props = {
+          type,
+          id,
+          innerRef,
+          ...field,
+          ...rest,
+          error: errors[id] && true,
+          helperText: errors[id] && errors[id].message,
+        };
 
-          return (
-            <div className="relative z-0 mb-6 w-full" key={id}>
-              {type === "switch" ? (
-                <Switch {...props} {...{ type: "checkbox" }} />
-              ) : type === "textarea" ? (
-                <Textarea {...props} />
-              ) : (
-                <Input {...props} />
-              )}
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <div className="relative z-0 mb-6 w-full" key={id}>
+            {type === "switch" ? (
+              <Switch {...props} {...{ type: "checkbox" }} />
+            ) : type === "textarea" ? (
+              <Textarea {...props} />
+            ) : (
+              <Input {...props} />
+            )}
+          </div>
+        );
+      })}
+
       <button
         disabled={isLoading}
         type="submit"
         className="text-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full px-5 py-2.5 text-sm text-center font-medium disabled:opacity-50 disabled:pointer-events-none"
       >
-        Submit
+        Save
       </button>
     </form>
   );

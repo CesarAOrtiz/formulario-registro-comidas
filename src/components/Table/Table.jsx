@@ -117,13 +117,13 @@ export default function Table({ className, ...props }) {
                 </td>
                 <td className="py-3 px-6 text-center sticky right-0 bg-inherit">
                   <div className="flex item-center justify-center cursor-pointer">
-                    <div className="w-4 mr-3 text-green-600 transform hover:text-blue-500 hover:scale-110">
+                    {/* <div className="w-4 mr-3 text-green-600 transform hover:text-blue-500 hover:scale-110">
                       <See
                         onClick={() =>
                           dispatcher.addRecord({ ...td, id: Date.now() })
                         }
                       />
-                    </div>
+                    </div> */}
                     <div className="w-4 mr-3 text-yellow-600 transform hover:text-blue-500 hover:scale-110">
                       <Edit
                         onClick={() =>

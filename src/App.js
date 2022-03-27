@@ -2,7 +2,7 @@ import { RecordsProvider } from "./contexts/RecordsContext";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Form from "./components/Form";
-import Table from "./components/Table";
+import EditPage from "./components/EditPage";
 
 function App() {
   return (
@@ -13,13 +13,10 @@ function App() {
         </Card>
 
         <section className="flex justify-evenly container">
-          <Card className="bg-white min-w-[250px] w-[90%] max-w-[380px] h-full max-h-[770px] mr-4">
+          {/* <Card className="bg-white min-w-[250px] w-[90%] max-w-[1100px] h-full max-h-[770px] mr-4">
             <Form />
-          </Card>
-
-          <Card className="bg-white overflow-auto max-w-[90%] h-full max-h-[700px] p-0">
-            <Table />
-          </Card>
+          </Card> */}
+          <EditPage />
         </section>
       </main>
     </RecordsProvider>
