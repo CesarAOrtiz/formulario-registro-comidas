@@ -2,11 +2,13 @@ import { useState } from "react";
 import Input from "./Input";
 import Switch from "./Switch";
 import Textarea from "./Textarea";
-import { useForm } from "react-hook-form";
 import { useRecords } from "../../contexts/RecordsContext";
 import Record from "../../models/Record";
 
 import inputs from "./inputs";
+
+import swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 export default function RecordForm(props) {
   const {
@@ -22,13 +24,20 @@ export default function RecordForm(props) {
 
   // función para simular el tiempo de carga de una petición
   const [isLoading, setIsLoading] = useState(false);
+  const [clicks, setClicks] = useState(1);
   const simulateAwaitResponse = (data) => {
     setIsLoading(true);
+    setClicks((prev) => prev + 1);
     setTimeout(() => {
-      dispatcher.addRecord(Record.fromJson({ ...data, id: Date.now() }));
       reset();
       setIsLoading(false);
-    }, 1000);
+      if (clicks % 3 === 0) {
+        swal.fire("¡Error!", "No se pudo guardar el registro", "error");
+      } else {
+        dispatcher.addRecord(Record.fromJson({ ...data, id: Date.now() }));
+        swal.fire("¡Registro creado!", "", "success");
+      }
+    }, 500);
   };
 
   return (

@@ -15,12 +15,14 @@ export default function usePagination(elements, size) {
     });
   }, [elements, size]);
 
-  const first = () => dispatch({ type: actions.FIRST_PAGE });
-  const last = () => dispatch({ type: actions.LAST_PAGE });
+  const first = () =>
+    state.current > 1 && dispatch({ type: actions.FIRST_PAGE });
+  const last = () =>
+    state.current < state.total && dispatch({ type: actions.LAST_PAGE });
 
+  const prev = () => state.current > 1 && dispatch({ type: actions.PREV_PAGE });
   const next = () =>
     state.current < state.total && dispatch({ type: actions.NEXT_PAGE });
-  const prev = () => state.current > 1 && dispatch({ type: actions.PREV_PAGE });
 
   const page = elements.slice(
     state.current * state.size - state.size,
@@ -28,7 +30,7 @@ export default function usePagination(elements, size) {
   );
 
   const cursor = state.current * state.size - state.size;
-  const start = cursor + 1;
+  const start = elements.length ? cursor + 1 : 0;
   const end = cursor + page.length;
 
   return {

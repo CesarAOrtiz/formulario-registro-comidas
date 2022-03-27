@@ -33,8 +33,8 @@ export const RecordsProvider = ({ children }) => {
   }, [state]);
 
   useEffect(() => {
-    const filtered = state.filter(({ name, lastName }) => {
-      return `${name} ${lastName}`
+    const filtered = state.filter(({ name, lastName, email }) => {
+      return `${name} ${lastName} ${email}`
         .toLowerCase()
         .trim()
         .includes(filterValue.toLowerCase().trim());

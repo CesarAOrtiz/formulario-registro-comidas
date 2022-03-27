@@ -4,14 +4,25 @@ import RightRow from "../../icons/RightRow";
 import DoubleLeft from "../../icons/DoubleLeft";
 import DoubleRight from "../../icons/DoubleRight";
 
+const Button = ({ className, children, ...props }) => {
+  return (
+    <button
+      className={`relative inline-flex items-center px-2 py-2 w-10 h-10  text-blue-700  rounded-full transition-colors duration-150 focus:shadow-outline hover:bg-blue-100 ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
 export default function Footer({ className, pagination, ...props }) {
   return (
     <div
       className={`bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 ${className}`}
       {...props}
     >
-      <div className="flex flex-1 items-center justify-between">
-        <p className="text-md text-gray-600">
+      <div className="flex flex-1 items-center justify-between flex-col lg:flex-row">
+        <p className="text-md text-gray-600 md:pb-2">
           Showing
           <span className="font-medium">{` ${pagination.start} `}</span>
           to
@@ -21,39 +32,27 @@ export default function Footer({ className, pagination, ...props }) {
           results
         </p>
         <nav
-          className="relative z-0 inline-flex rounded-md shadow-md"
+          className="relative z-0 inline-flex rounded-md"
           aria-label="Pagination"
         >
-          <button
-            onClick={pagination.first}
-            className="relative inline-flex items-center px-2 py-2 rounded-l-md border bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
-          >
+          <Button onClick={pagination.first}>
             <DoubleLeft />
-          </button>
-          <button
-            onClick={pagination.prev}
-            className="relative inline-flex items-center px-2 py-2 border bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
-          >
-            <LeftRow />
-          </button>
+          </Button>
+          <Button onClick={pagination.prev}>
+            <LeftRow className="w-6" />
+          </Button>
           <button
             aria-current="page"
-            className="z-10 bg-blue-700 border-y text-white relative inline-flex items-center px-4 py-2 text-sm font-medium"
+            className="w-10 h-10 mx-1 pointer-events-none text-white bg-blue-700 rounded-full focus:shadow-outline"
           >
             {pagination.current}
           </button>
-          <button
-            onClick={pagination.next}
-            className="relative inline-flex items-center px-2 py-2 border bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
-          >
-            <RightRow />
-          </button>
-          <button
-            onClick={pagination.last}
-            className="relative inline-flex items-center px-2 py-2 rounded-r-md border bg-white text-sm font-medium text-gray-600 hover:bg-gray-50"
-          >
+          <Button onClick={pagination.next}>
+            <RightRow className="w-6" />
+          </Button>
+          <Button onClick={pagination.last}>
             <DoubleRight />
-          </button>
+          </Button>
         </nav>
       </div>
     </div>
