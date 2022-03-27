@@ -16,7 +16,7 @@ function App() {
 
           <section className="flex justify-evenly container flex-col lg:flex-row">
             <Routes>
-              <Route path="/" element={<Navigate to="registrado" />} />
+              <Route path="/" element={<Navigate to="registro" />} />
               <Route path="/registro" element={<CreatePage />} />
               <Route path="/listado" element={<EditPage />} />
             </Routes>
