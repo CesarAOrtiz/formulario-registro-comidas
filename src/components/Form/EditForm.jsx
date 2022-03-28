@@ -43,7 +43,7 @@ export default function RecordForm({ selected, onSubmit, ...props }) {
 
   return (
     <form {...props} onSubmit={handleSubmit(simulateAwaitResponse)}>
-      <div className="grid gap-4 grid-cols-2 lg:grid-cols-1 lg:gap-0">
+      <div className="grid gap-0 grid-cols-1 sm:grid-cols-2 sm:gap-2 lg:grid-cols-1 lg:gap-0">
         {inputs.map((input) => {
           const {
             type,

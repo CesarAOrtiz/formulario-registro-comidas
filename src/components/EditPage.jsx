@@ -41,18 +41,17 @@ export default function EditPage() {
   };
 
   return (
-    <>
-      <Card className="bg-white w-full h-full max-h-[770px] mx-auto lg:mr-4 lg:min-w-[250px] lg:w-[90%] lg:max-w-[380px] mb-5 lg:mb-0">
-        <EditForm selected={selected} onSubmit={handleSubmit} />
-      </Card>
-
-      <Card className="bg-white overflow-auto max-w-full h-full max-h-[700px] p-0 mx-auto">
+    <div className="lg:flex lg:flex-row-reverse w-full">
+      <Card className="bg-white overflow-auto h-min max-h-[700px] p-0 mx-auto mb-5 ">
         <Table
           onRowEdit={handleEdit}
           onDelivered={handleDelivered}
           onRowDelete={handleDelete}
         />
       </Card>
-    </>
+      <Card className="bg-white w-full h-full max-h-[770px] mx-auto lg:mr-4 lg:min-w-[250px] lg:w-[90%] lg:max-w-[380px] lg:mb-0">
+        <EditForm selected={selected} onSubmit={handleSubmit} />
+      </Card>
+    </div>
   );
 }
