@@ -36,7 +36,7 @@ $ npm start
 
 ## Funcionamiento de la aplicación
 
-[Página de Registro](https://formulario-registro-comidas-e6pmcswm4-cesaraortiz.vercel.app/registro)
+[Página de Registro](https://formulario-registro-comidas.vercel.app/registro/)
 
 ![](./screenshots/registro-desktop.jpeg)
 
@@ -48,7 +48,7 @@ Al realizarce la operación se muestra una alerta notificando el resultado. Casa
 
 En caso de éxito el registro se almacena en el local storage y estará disponible en la página se listado.
 
-[Página de Listado](https://formulario-registro-comidas-e6pmcswm4-cesaraortiz.vercel.app/listado)
+[Página de Listado](https://formulario-registro-comidas.vercel.app/listado)
 
 ![](./screenshots/listado-desktop.jpeg)
 

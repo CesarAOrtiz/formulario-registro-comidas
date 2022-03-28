@@ -56,7 +56,7 @@ const inputs = [
     validate: {
       pattern: (v) =>
         !v ||
-        /^[\+]?[0-9]?[0-9]{10}$/.test(v) ||
+        /^[+]?[0-9]?[0-9]{10}$/.test(v) ||
         "Debe ser un número de teléfono válido",
     },
   },
