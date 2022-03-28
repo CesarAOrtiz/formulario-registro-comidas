@@ -55,66 +55,68 @@ export default function Table({
           <option value="15">15</option>
         </select>
       </div>
-      <table className={`table-fixed ${className}`} {...props}>
-        <thead>
-          <tr className="bg-blue-700 text-white uppercase text-sm">
-            {headers.map((header) => (
-              <th
-                key={header}
-                className="py-3 px-6 text-left sticky top-[68px] bg-inherit z-10"
-              >
-                {header}
+      <div className="">
+        <table className={`table-fixed ${className}`} {...props}>
+          <thead className="">
+            <tr className="bg-blue-700 text-white uppercase text-sm">
+              {headers.map((header) => (
+                <th
+                  key={header}
+                  className="py-3 px-6 text-left sticky top-[68px] bg-inherit z-10"
+                >
+                  {header}
+                </th>
+              ))}
+
+              <th className="py-3 px-6 text-center sticky top-[68px] bg-inherit right-0 z-10">
+                Actions
               </th>
-            ))}
-
-            <th className="py-3 px-6 text-center sticky top-[68px] bg-inherit right-0 z-10">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-600 text-sm font-light">
-          {/* {console.log(page[0].delivered)} */}
-          {page.map((td, i) => {
-            const { id, delivered, ...record } = td;
-            return (
-              <tr
-                key={id}
-                className="border-b border-gray-200 bg-gray-50 hover:bg-gray-100"
-              >
-                {Object.keys(record).map((key, i) => {
-                  return (
-                    <td key={key} className="py-3 px-6 text-left">
-                      <div className="flex items-center">
-                        <span className="font-medium">{record[key]}</span>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light h-16">
+            {page.map((td, i) => {
+              const { id, delivered, ...record } = td;
+              return (
+                <tr
+                  key={id}
+                  className="border-b border-gray-200 bg-gray-50 hover:bg-gray-100"
+                >
+                  {Object.keys(record).map((key, i) => {
+                    return (
+                      <td key={key} className="py-3 px-6 text-left">
+                        <div className="flex items-center">
+                          <span className="font-medium">{record[key]}</span>
+                        </div>
+                      </td>
+                    );
+                  })}
+                  <td className="py-3 px-6 text-left">
+                    <div className="flex items-center">
+                      <Switch
+                        id={id}
+                        checked={td.delivered}
+                        onChange={() => onDelivered(td)}
+                      />
+                    </div>
+                  </td>
+                  <td className="py-3 px-6 text-center sticky right-0 bg-inherit">
+                    <div className="flex item-center justify-center cursor-pointer">
+                      <div className="w-4 mr-3 text-yellow-600 transform hover:text-blue-500 hover:scale-110">
+                        <Edit onClick={() => onRowEdit && onRowEdit(td)} />
                       </div>
-                    </td>
-                  );
-                })}
-                <td className="py-3 px-6 text-left">
-                  <div className="flex items-center">
-                    <Switch
-                      id={id}
-                      checked={td.delivered}
-                      onChange={() => onDelivered(td)}
-                    />
-                  </div>
-                </td>
-                <td className="py-3 px-6 text-center sticky right-0 bg-inherit">
-                  <div className="flex item-center justify-center cursor-pointer">
-                    <div className="w-4 mr-3 text-yellow-600 transform hover:text-blue-500 hover:scale-110">
-                      <Edit onClick={() => onRowEdit && onRowEdit(td)} />
+                      <div className="w-4 mr-3 text-red-600 transform hover:text-blue-500 hover:scale-110">
+                        <Delete
+                          onClick={() => onRowDelete && onRowDelete(td)}
+                        />
+                      </div>
                     </div>
-                    <div className="w-4 mr-3 text-red-600 transform hover:text-blue-500 hover:scale-110">
-                      <Delete onClick={() => onRowDelete && onRowDelete(td)} />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <TablePagination
         className="sticky bottom-0 left-0"
         pagination={pagination}
