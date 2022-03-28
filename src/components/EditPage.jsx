@@ -22,16 +22,20 @@ export default function EditPage() {
 
   const handleDelete = async ({ id }) => {
     const { isConfirmed } = await swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "¿Está seguro?",
       showCancelButton: true,
       confirmButtonColor: "#dc2626",
       cancelButtonColor: "#1d4ed8",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
     });
     if (isConfirmed) {
       dispatcher.deleteRecord(id);
-      swal.fire("Deleted!", "Your file has been deleted.", "success");
+      swal.fire(
+        "Eliminado",
+        "El registro se ha eliminado con éxito",
+        "success"
+      );
     }
   };
 
