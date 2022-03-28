@@ -43,6 +43,7 @@ export default function EditPage() {
   return (
     <div className="lg:flex lg:flex-row-reverse w-full">
       <Card className="bg-white overflow-auto h-min max-h-[700px] p-0 mx-auto mb-5 ">
+        {/* overflow-auto */}
         <Table
           onRowEdit={handleEdit}
           onDelivered={handleDelivered}
