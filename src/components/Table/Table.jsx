@@ -40,11 +40,6 @@ export default function Table({
             onChange={(e) => setFilterValue(e.target.value)}
           />
         </div>
-        {/* <select >
-          <option value="">All</option>
-          <option value="true">Delivered</option>
-          <option value="false">Not Delivered</option>
-        </select> */}
         <select
           title="pageSize"
           className="py-2 px-4 bg-white shadow-lg rounded-lg cursor-pointer focus:outline-none"
@@ -56,7 +51,7 @@ export default function Table({
         </select>
       </div>
       <div className="">
-        <table className={`table-fixed ${className}`} {...props}>
+        <table className={`table-fixed ${className || ""}`} {...props}>
           <thead className="">
             <tr className="bg-blue-700 text-white uppercase text-sm">
               {headers.map((header) => (
@@ -73,7 +68,7 @@ export default function Table({
               </th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 text-sm font-light h-16">
+          <tbody className="text-gray-600 text-sm font-light">
             {page.map((td, i) => {
               const { id, delivered, ...record } = td;
               return (
