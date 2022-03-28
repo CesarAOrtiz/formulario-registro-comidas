@@ -3,29 +3,29 @@ const inputs = [
     type: "text",
     name: "name",
     id: "name",
-    label: "Name",
+    label: "Nombre",
     required: true,
 
-    helperText: "Is required",
+    helperText: "Este campo es requerido",
     autoFocus: true,
   },
   {
     type: "text",
     name: "lastName",
     id: "lastName",
-    label: "Last Name",
+    label: "Apellido",
     required: true,
 
-    helperText: "Is required",
+    helperText: "Este campo es requerido",
   },
   {
     type: "number",
     name: "age",
     id: "age",
-    label: "Age",
+    label: "Edad",
     required: true,
 
-    helperText: "Is required",
+    helperText: "Este campo es requerido",
   },
   {
     type: "text",
@@ -34,41 +34,43 @@ const inputs = [
     label: "Email",
     required: true,
 
-    helperText: "Must be a valid email",
+    helperText: "Debe ser un email válido",
     pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
   },
   {
     type: "text",
     name: "address",
     id: "address",
-    label: "Address",
+    label: "Dirección",
     required: true,
 
-    helperText: "Is required",
+    helperText: "Este campo es requerido",
   },
   {
     type: "tel",
     name: "phone",
     id: "phone",
-    label: "Phone",
+    label: "Teléfono",
     required: false,
 
     validate: {
       pattern: (v) =>
-        !v || /^[0-9]{10}$/.test(v) || "Must be a valid phone number",
+        !v ||
+        /^[\+]?[0-9]?[0-9]{10}$/.test(v) ||
+        "Debe ser un número de teléfono válido",
     },
   },
   {
     type: "checkbox",
     name: "delivered",
     id: "delivered",
-    label: "Delivered",
+    label: "Entregado",
   },
   {
     type: "textarea",
     name: "observation",
     id: "observation",
-    label: "Observations",
+    label: "Observaciones",
     required: false,
   },
 ];

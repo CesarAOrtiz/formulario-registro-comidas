@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Jornada de almuerzo ¡gratis!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+La aplicación permite al usiario guardar, editar, leer o eliminar los registros desde las vistas de registro y listado.
 
-## Available Scripts
+## Librerías usadas
 
-In the project directory, you can run:
+[React](https://es.reactjs.org/):
+Framework front end utilizado
 
-### `npm start`
+[Tailwindcss](https://tailwindcss.com/):
+framework de estilos css basado en clases.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[React Router](https://reactrouter.com/):
+Libreria utilizada para el routing de las vistas.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[React Hook Form](https://react-hook-form.com/):
+Libreria de hooks utilizados para la validación de formularios.
 
-### `npm test`
+[SweetAlert2](https://sweetalert2.github.io/):
+Libreria utilizada para la creación de alertas de confirmación y notificación.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Ejecución de la aplicación
 
-### `npm run build`
+Para ejecutar esta aplicación vas a necesitar [Git](https://git-scm.com) y [Node.js](https://nodejs.org/en/download/) instalados.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Clonar el repositorio
+$ git clone https://github.com/CesarAOrtiz/formulario-registro-comidas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Instalar las dependencias
+$ npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Ejecutar la aplicación
+$ npm start
+```
 
-### `npm run eject`
+## Funcionamiento de la aplicación
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[Página de Registro](https://formulario-registro-comidas-e6pmcswm4-cesaraortiz.vercel.app/registro)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](./screenshots/registro-desktop.jpeg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+En esta pantalla se encuentra el formulario de creación de registros. Los campos se validan mientras el usuario escribe, muestran un texto describiendo el tipo de error y no permite enviar el formulario hasta que los campos estén debidamente completados.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Al enviar el formulario este simula un pequeño tiempo de espera para mostrar que el botón de envío se desaculita para evitar el envío de otro formulario hasta que se obtenga la respuesta.
 
-## Learn More
+Al realizarce la operación se muestra una alerta notificando el resultado. Casa 3 envíos el tercero simula un error.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+En caso de éxito el registro se almacena en el local storage y estará disponible en la página se listado.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Página de Listado](https://formulario-registro-comidas-e6pmcswm4-cesaraortiz.vercel.app/listado)
 
-### Code Splitting
+![](./screenshots/listado-desktop.jpeg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Aquí se muestra una lista con los registros que se han agregado, cada fila tiene un botón para actualizar el estado de la entrega y al precinarlo muestra una notificación de la acción.
 
-### Analyzing the Bundle Size
+La tabla cuenta con una barra de búsqueda para filtrar por nombre o correo, y una sección de paginación para navegar por ella. También tiene una columna de acciones con botones de editar y eliminar. Está columna es sticky por lo que está siempre visible para facilitar su acceso a los usuarios.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Al presionar el botón de eliminar aparece una alerta de confirmación de la acción y en caso de permitirse la acción una notificación del resultado.
 
-### Making a Progressive Web App
+Botón de editra llena el formulario con los datos del registro seleccionado. El cuál es editado al enviar el formulario y este cambio se refleja en la tabla.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este formulario al igual que el de creación simula un tiempo de carga y caso de error.

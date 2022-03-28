@@ -1,4 +1,4 @@
-import TablePagination from "./TablePagination";
+import Pagination from "./Pagination";
 import Search from "./Search";
 import Switch from "../Form/Switch";
 import Delete from "../../icons/Delete";
@@ -10,14 +10,14 @@ import usePagination from "../../hooks/usePagination";
 import { useState } from "react";
 
 const headers = [
-  "Name",
-  "Last Name",
-  "Phone",
+  "Nombre",
+  "Apellido",
+  "Teléfono",
   "Email",
-  "Age",
-  "Address",
-  "Obsevations",
-  "Delivered",
+  "Edad",
+  "Dirección",
+  "Observaciones",
+  "Entregado",
 ];
 
 export default function Table({
@@ -112,10 +112,7 @@ export default function Table({
           </tbody>
         </table>
       </div>
-      <TablePagination
-        className="sticky bottom-0 left-0"
-        pagination={pagination}
-      />
+      <Pagination className="sticky bottom-0 left-0" pagination={pagination} />
     </>
   );
 }

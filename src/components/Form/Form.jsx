@@ -93,7 +93,7 @@ export default function RecordForm(props) {
         type="submit"
         className="text-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full px-5 py-2.5 text-sm text-center font-medium disabled:opacity-50 disabled:pointer-events-none"
       >
-        Submit
+        Enviar
       </button>
     </form>
   );

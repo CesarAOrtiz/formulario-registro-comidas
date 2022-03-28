@@ -14,7 +14,7 @@ const Button = ({ className, children, ...props }) => {
   );
 };
 
-export default function TablePagination({ className, pagination, ...props }) {
+export default function Pagination({ className, pagination, ...props }) {
   return (
     <div
       className={`bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 ${className}`}
@@ -22,13 +22,11 @@ export default function TablePagination({ className, pagination, ...props }) {
     >
       <nav className="flex flex-1 items-center justify-between flex-col lg:flex-row">
         <p className="text-md text-gray-600 md:pb-2">
-          Showing
-          <span className="font-medium">{` ${pagination.start} `}</span>
-          to
+          <span className="font-medium">{` ${pagination.start} -`}</span>
           <span className="font-medium">{` ${pagination.end} `}</span>
-          of
+          de
           <span className="font-medium">{` ${pagination.length} `}</span>
-          results
+          resultados
         </p>
         <div
           className="relative z-0 inline-flex rounded-md"
