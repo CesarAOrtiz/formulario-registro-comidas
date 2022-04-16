@@ -1,54 +1,47 @@
+import { useState } from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import Card from "./Card";
 import Field from "./Input/Field";
-
-const yupSchema = Yup.object({
-  name: Yup.string().required("Required"),
-  textarea: Yup.string().required("Required"),
-  select: Yup.string().required("Required"),
-  checkbox: Yup.boolean().oneOf([true], "Must be marked").required("Required"),
-});
-const initailValues = {
-  name: "",
-  textarea: "",
-  select: "",
-  checkbox: false,
-};
+import fields, { initialValues, validationSchema } from "./Input/formJson";
 
 export default function FormikForm() {
+  const [loading, setLoading] = useState(false);
   return (
     <Card className="bg-white min-w-[250px] w-full max-w-[1100px] h-full max-h-[770px] mx-auto">
       <Formik
-        initialValues={initailValues}
+        initialValues={{ ...initialValues, picked: "" }}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
         }}
-        validationSchema={yupSchema}
       >
         <Form>
-          <Field name={"name"} type={"text"} label={"Name"} />
-          <Field
-            name={"textarea"}
-            type={"textarea"}
-            label={"Textarea"}
-            rows={4}
-          />
-          <Field name={"select"} type={"select"} label={"Select"}>
-            <option value="">Select an option</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </Field>
-          <Field
-            name={"checkbox"}
-            id={"checkbox"}
-            type={"checkbox"}
-            label={"Checkbox"}
-          />
+          {fields.map((field, i) => {
+            return field.props.type === "select" ? (
+              <Field key={field.props.name} {...field.props}>
+                {field.options.map(({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </Field>
+            ) : field.props.type === "radio" ? (
+              <Field
+                key={field.props.name + field.props.value}
+                {...field.props}
+              />
+            ) : (
+              <Field key={field.props.name} {...field.props} />
+            );
+          })}
 
           <button
             type="submit"
+            disabled={loading}
             className="text-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full px-5 py-2.5 text-sm text-center font-medium disabled:opacity-50 disabled:pointer-events-none"
           >
             Enviar
