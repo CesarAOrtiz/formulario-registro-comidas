@@ -3,6 +3,7 @@ import Card from "./components/Card";
 import Header from "./components/Header";
 import CreatePage from "./components/CreatePage";
 import EditPage from "./components/EditPage";
+import FormikForm from "./components/FormikForm";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
 
           <section className="flex justify-evenly container flex-col lg:flex-row">
             <Routes>
-              <Route path="/" element={<Navigate to="registro" />} />
+              <Route path="/" element={<Navigate to="formik" />} />
+              <Route path="/formik" element={<FormikForm />} />
               <Route path="/registro" element={<CreatePage />} />
               <Route path="/listado" element={<EditPage />} />
             </Routes>
